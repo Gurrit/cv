@@ -7,6 +7,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        ref: cv-pdf 
 
       - name: Build using latexmk
         run: latexmk -pdf -output-directory=out -xelatex resume.tex
@@ -17,11 +18,9 @@ jobs:
           name: main-document
           path: out/resume.pdf
 
-      - name: Push artifact to branch
-        uses: actions/checkout@v4
-        ref: artifact
+      - name: Push CV to branch
         run: |
-          git config --global user.name 'Artifact Pusher'
+          git config --global user.name 'CV Pusher'
           git config --global user.email 'gurrit@users.noreply.github.com'
           git commit -m "update resume artifact"
           git push
