@@ -16,3 +16,12 @@ jobs:
         with:
           name: main-document
           path: out/resume.pdf
+
+      - name: Push artifact to branch
+        uses: actions/checkout@v4
+        ref: artifact
+        run: |
+          git config --global user.name 'Artifact Pusher'
+          git config --global user.email 'gurrit@users.noreply.github.com'
+          git commit -m "update resume artifact"
+          git push
